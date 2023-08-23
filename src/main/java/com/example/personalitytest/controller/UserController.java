@@ -25,7 +25,7 @@ public class UserController {
     public void registerUser(@RequestParam(value = "username") String username ) {
 
         if(username.isEmpty()) {
-            //exception
+            throw new IllegalStateException("Username should not be blank");
         }
 
         userRegistrationService.register(username);

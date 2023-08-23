@@ -10,9 +10,10 @@ public class QuestionMapper {
     public QuestionDto toDto(Question question) {
 
         QuestionDto questionDto = new QuestionDto();
+        questionDto.setId(question.getId());
         questionDto.setQuestion(question.getQuestion());
         questionDto.setOptions(question.getOptions());
-        return new QuestionDto();
+        return questionDto;
     }
 
     public Question toModel() {
