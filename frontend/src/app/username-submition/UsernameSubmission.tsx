@@ -1,13 +1,10 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import axios from "axios";
-import { useNavigate } from 'react-router-dom';
-import {UserResponse} from "./model/UserResponse";
+import {useNavigate} from 'react-router-dom';
+import {UserResponse} from "../model/UserResponse";
+import './UsernameSubmition.css'; // Import your custom styles
 
-interface UsernameSubmissionProps {
-    onSubmit: (username: string) => void;
-}
-
-function UsernameSubmission({ onSubmit }: UsernameSubmissionProps) {
+function UsernameSubmission() {
     const [username, setUsername] = useState<string>('');
     const [responseApi, setResponse] = useState<UserResponse>();
     const navigate = useNavigate();
@@ -18,7 +15,7 @@ function UsernameSubmission({ onSubmit }: UsernameSubmissionProps) {
 
     const handleSubmit = async () => {
         try {
-            const response = await axios.post('http://localhost:8090/api/users/register', null,{
+            const response = await axios.post('http://localhost:8090/api/users/register', null, {
                 params: {
                     username: username
                 }
@@ -32,7 +29,7 @@ function UsernameSubmission({ onSubmit }: UsernameSubmissionProps) {
             };
 
             const additionalData = {userId: mappedUserProfile.id, username: mappedUserProfile.username};
-            navigate('/questions', {state: additionalData });
+            navigate('/questions', {state: additionalData});
 
         } catch (error) {
             console.error('Error submitting username:', error);
@@ -40,15 +37,19 @@ function UsernameSubmission({ onSubmit }: UsernameSubmissionProps) {
     };
 
     return (
-        <div className="username-submission">
+        <div className="username-form">
             <input
                 type="text"
+                className="username-input"
+                placeholder="Username"
                 value={username}
                 onChange={handleInputChange}
-                placeholder="Enter a username"
             />
-            <button onClick={handleSubmit}>Submit</button>
+            <button type="submit" className="submit-button" onClick={handleSubmit}>
+                Submit
+            </button>
         </div>
+
     );
 }
 

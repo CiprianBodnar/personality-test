@@ -1,0 +1,49 @@
+/* LandingPage.css */
+.landing-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f5f5f5;
+}
+
+.landing-content {
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+.landing-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.username-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.username-label {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.username-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.submit-button {
+    background-color: #007bff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+}

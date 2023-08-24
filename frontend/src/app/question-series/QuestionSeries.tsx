@@ -2,8 +2,7 @@ import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import {Question} from "../model/Question";
 import './QuestionSeries.css';
-import {useLocation} from "react-router-dom"; // Import the CSS file
-
+import {useLocation} from "react-router-dom";
 
 function QuestionSeries() {
 
@@ -20,7 +19,7 @@ function QuestionSeries() {
         setSelectedItem(item);
     };
     const handleNextClick = async () => {
-        if (currentIndex < questions.length - 1) {
+        if (currentIndex < questions.length) {
 
             let questionId = questions[currentIndex].id;
             await axios.post('http://localhost:8090/api/answers/create', null, {
@@ -46,7 +45,7 @@ function QuestionSeries() {
 
     useEffect(() => {
         fetchData();
-    }, []); // Empty dependency array ensures this effect runs once on component mount
+    }, []);
 
     const fetchData = async () => {
         try {
@@ -58,35 +57,34 @@ function QuestionSeries() {
     };
 
     return (
-
         <div className="object-list">
             <h1>Are you an introvert or an extrovert?</h1>
-            <ul>
-                {
-                    //<QuestionFill useQuestion={questions[currentIndex]}/>
-                    <li>{questions[currentIndex]?.question}
-                        <ul>
-                            {
-                                questions[currentIndex]?.options.map((option: string, index: number) => (
-                                    <li
-                                        key={index}
-                                        className={selectedItem === option ? 'selected' : ''}
-                                        onClick={() => handleItemClick(option)}
-                                    >
-                                        {option}
-                                    </li>
-                                ))
-                            }
-                        </ul>
-                    </li>
-                }
-            </ul>
-            <p>Selected item: {selectedItem || 'None'}</p>
-            {showNextButton && <button onClick={handleNextClick}>Next</button>}
+            <div className="question-container">
+                <p className="question">{questions[currentIndex]?.question}</p>
+                <ul className="options-list">
+                    {questions[currentIndex]?.options.map((option: string, index: number) => (
+                        <li
+                            key={index}
+                            className={`option-item ${selectedItem === option ? 'selected' : ''}`}
+                            onClick={() => handleItemClick(option)}
+                        >
+                            {option}
+                        </li>
+                    ))}
+                </ul>
+            </div>
+
+            {currentIndex < questions.length && (
+                <p>Selected item: {selectedItem || 'None'}</p>
+            )}
+            {showNextButton && (
+                <button className="next-button" onClick={handleNextClick}>
+                    {currentIndex > questions.length - 1 ? 'Submit' : 'Next'}
+                </button>
+            )}
             {result}
         </div>
     );
-
 }
 
 export default QuestionSeries;
