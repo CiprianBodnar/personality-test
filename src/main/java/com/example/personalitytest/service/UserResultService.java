@@ -34,7 +34,7 @@ public class UserResultService {
         return calculateResult(answersLenght);
     }
 
-    private String calculateResult(int answersLength) {
+    public String calculateResult(int answersLength) {
         return answersLength % 2 == 0 ? "Introvert" : "Extrovert";
     }
 }
