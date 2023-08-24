@@ -1,5 +1,5 @@
 import {Question} from "./model/Question";
-import {useState} from "react";
+import { useLocation } from 'react-router-dom';
 
 interface QuestionFillProps {
     useQuestion: Question;
@@ -8,10 +8,12 @@ function QuestionFill(props: QuestionFillProps) {
 
     const { id, question, options } = props.useQuestion;
 
-
-
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
+    const userId = searchParams.get('userId');
     return (
         <div>
+
             <li key={id}>{question}
                 <ul>
                     {

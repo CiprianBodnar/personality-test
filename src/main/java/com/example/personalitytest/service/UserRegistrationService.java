@@ -19,11 +19,13 @@ public class UserRegistrationService {
         this.userRepository = userRepository;
     }
 
-    public void register(String username) {
+    public User register(String username) {
 
         User user = new User();
         user.setUsername(username);
         user.setResult(String.valueOf(UserResult.NotAssigned));
         userRepository.save(user);
+
+        return user;
     }
 }
